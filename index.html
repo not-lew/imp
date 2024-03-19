@@ -5,132 +5,156 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculadora de Imposto de Renda</title>
 <style>
+    /* Estilos básicos para o corpo da página, incluindo fonte, cor de fundo e alinhamento */
     body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        transition: background-color 0.3s ease;
+        font-family: Arial, sans-serif; /* Define a fonte */
+        background-color: #f4f4f4; /* Cor de fundo clara */
+        margin: 0; /* Remove margens padrão */
+        padding: 0; /* Remove preenchimentos padrão */
+        display: flex; /* Usa Flexbox para alinhar itens */
+        justify-content: center; /* Centraliza horizontalmente */
+        align-items: center; /* Centraliza verticalmente */
+        height: 100vh; /* Altura total da viewport */
+        transition: background-color 0.3s ease; /* Transição suave da cor de fundo */
     }
 
+    /* Estilos para a calculadora, incluindo cor de fundo, bordas e sombras */
     .calculator {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        max-width: 400px;
-        width: 100%;
-        position: relative; /* Adicionado para posicionamento absoluto */
+        background-color: #fff; /* Cor de fundo branca */
+        border-radius: 10px; /* Bordas arredondadas */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+        padding: 20px; /* Preenchimento interno */
+        max-width: 400px; /* Largura máxima */
+        width: 100%; /* Largura adaptável */
+        position: relative; /* Para posicionamento absoluto de elementos internos */
     }
 
+    /* Estilos para inputs de texto da calculadora */
     .calculator input[type="text"] {
-        width: calc(100% - 20px);
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
+        width: calc(100% - 20px); /* Largura adaptável com base no preenchimento */
+        margin-bottom: 10px; /* Margem inferior */
+        padding: 10px; /* Preenchimento interno */
+        border-radius: 5px; /* Bordas arredondadas */
+        border: 1px solid #ccc; /* Borda sólida e clara */
     }
 
+    /* Estilos para o botão de submissão */
     .calculator input[type="submit"] {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-        background-color: #4CAF50;
-        color: white;
-        cursor: pointer;
+        width: 100%; /* Largura total */
+        padding: 10px; /* Preenchimento interno */
+        border-radius: 5px; /* Bordas arredondadas */
+        border: none; /* Sem borda */
+        background-color: #4CAF50; /* Cor de fundo verde */
+        color: white; /* Texto branco */
+        cursor: pointer; /* Cursor do mouse como ponteiro */
     }
 
+    /* Estilos para os resultados mostrados após o cálculo */
     .result {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-weight: bold;
+        margin-top: 10px; /* Margem superior */
+        margin-bottom: 10px; /* Margem inferior */
+        font-weight: bold; /* Texto em negrito */
     }
 
+    /* Estilos para o botão de alternância do tema */
     .toggle-theme {
-        position: absolute;
-        top: 5px;
-        right: 10px;
-        border-radius: 50%;
-        border: none;
-        background-color: #4CAF50;
-        color: white;
-        cursor: pointer;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 20px;
+        position: absolute; /* Posicionamento absoluto */
+        top: 5px; /* Posição superior */
+        right: 10px; /* Posição direita */
+        border-radius: 50%; /* Forma circular */
+        border: none; /* Sem borda */
+        background-color: #4CAF50; /* Cor de fundo verde */
+        color: white; /* Texto branco */
+        cursor: pointer; /* Cursor do mouse como ponteiro */
+        width: 40px; /* Largura fixa */
+        height: 40px; /* Altura fixa */
+        display: flex; /* Usa Flexbox para alinhar o ícone do sol */
+        justify-content: center; /* Centraliza horizontalmente o ícone */
+        align-items: center; /* Centraliza verticalmente o ícone */
+        font-size: 20px; /* Tamanho do ícone */
     }
 
-    /* Adicionando estilos para o tema escuro */
+    /* Estilos adicionais para o tema escuro */
     body.dark-theme {
-        background-color: #333;
+        background-color: #333; /* Cor de fundo escura */
     }
 
     .calculator.dark-theme {
-        background-color: #555;
-        color: white;
+        background-color: #555; /* Cor de fundo da calculadora mais escura */
+        color: white; /* Texto branco */
     }
 </style>
 </head>
 <body>
-<div class="calculator">
-    <h2>Calculadora de Imposto de Renda</h2>
-    <label for="salario">Salário anual:</label>
-    <input type="text" id="salario" placeholder="Digite seu salário anual" onkeypress="handleKeyPress(event)">
+    <!-- Estrutura da calculadora de imposto de renda, incluindo título, entrada para o salário anual, e botões -->
+    <div class="calculator">
+        <h2>Calculadora de Imposto de Renda</h2>
+        <!-- Campo de entrada para o usuário inserir o salário anual -->
+        <label for="salario">Salário anual:</label>
+        <input type="text" id="salario" placeholder="Digite seu salário anual" onkeypress="handleKeyPress(event)">
+        
+        <!-- Div para mostrar o resultado do cálculo do imposto -->
+        <div class="result" id="resultado"></div>
+        
+        <!-- Div para mostrar o salário líquido após o cálculo do imposto -->
+        <div class="result" id="salario-liquido"></div>
+        <!-- Botão para iniciar o cálculo do imposto -->
+        <input type="submit" value="Calcular" onclick="calcularImposto()">
+        <!-- Botão para alternar entre temas claro e escuro -->
+        <button class="toggle-theme" onclick="toggleTheme()">☀</button>
+    </div>
     
-    <div class="result" id="resultado"></div>
+    <script>
+        // Função para calcular o imposto com base no salário anual inserido pelo usuário
+        function calcularImposto() {
+            // Converte o valor do input para número, substituindo vírgula por ponto
+            var salarioAnual = parseFloat(document.getElementById('salario').value.replace(',', '.'));
     
-    <div class="result" id="salario-liquido"></div>
-    <input type="submit" value="Calcular" onclick="calcularImposto()">
-    <button class="toggle-theme" onclick="toggleTheme()">☀</button>
-</div>
-
-<script>
-    function calcularImposto() {
-        var salarioAnual = parseFloat(document.getElementById('salario').value.replace(',', '.'));
-
-        if (isNaN(salarioAnual)) {
-            alert('Por favor, insira um valor numérico válido.');
-            return;
+            // Verifica se o valor inserido é um número válido
+            if (isNaN(salarioAnual)) {
+                alert('Por favor, insira um valor numérico válido.');
+                return;
+            }
+    
+            // Declara a variável imposto
+            var imposto;
+    
+            // Calcula o imposto com base no salário anual seguindo as faixas de tributação
+            if (salarioAnual <= 2259.20){
+                imposto = 0;
+            } else if (salarioAnual <= 2826.65) {
+                imposto = (salarioAnual * 0.075);
+            } else if (salarioAnual <= 3751.05) {
+                imposto = (salarioAnual * 0.15);
+            } else if (salarioAnual <= 4664.68) {
+                imposto = (salarioAnual * 0.225);
+            } else {
+                imposto = (salarioAnual * 0.275);
+            }
+    
+            // Calcula o salário líquido subtraindo o imposto do salário anual
+            var salarioLiquido = salarioAnual - imposto;
+    
+            // Exibe os resultados na página
+            document.getElementById('resultado').innerHTML = "Imposto de Renda: R$" + imposto.toFixed(2);
+            document.getElementById('salario-liquido').innerHTML = "Salário Líquido: R$" + salarioLiquido.toFixed(2);
         }
-
-        var imposto;
-
-        if (salarioAnual <= 1903.98) {
-            imposto = 0;
-        } else if (salarioAnual <= 2826.65) {
-            imposto = (salarioAnual * 0.075) - 142.80;
-        } else if (salarioAnual <= 3751.05) {
-            imposto = (salarioAnual * 0.15) - 354.80;
-        } else if (salarioAnual <= 4664.68) {
-            imposto = (salarioAnual * 0.225) - 636.13;
-        } else {
-            imposto = (salarioAnual * 0.275) - 869.36;
+    
+        // Função para alternar o tema da página entre claro e escuro
+        function toggleTheme() {
+            // Seleciona o corpo do documento e alterna a classe 'dark-theme'
+            var body = document.querySelector('body');
+            body.classList.toggle('dark-theme');
         }
-
-        var salarioLiquido = salarioAnual - imposto;
-
-        document.getElementById('resultado').innerHTML = "Imposto de Renda: R$" + imposto.toFixed(2);
-        document.getElementById('salario-liquido').innerHTML = "Salário Líquido: R$" + salarioLiquido.toFixed(2);
-    }
-
-    function toggleTheme() {
-        var body = document.querySelector('body');
-        body.classList.toggle('dark-theme');
-    }
-
-    function handleKeyPress(event) {
-        if (event.key === "Enter") {
-            calcularImposto();
+    
+        // Função para permitir o cálculo do imposto ao pressionar a tecla Enter
+        function handleKeyPress(event) {
+            // Verifica se a tecla pressionada foi Enter
+            if (event.key === "Enter") {
+                calcularImposto();
+            }
         }
-    }
-</script>
-</body>
+    </script>
+    </body>
+    
 </html>
